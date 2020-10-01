@@ -1,0 +1,57 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+
+<body>
+    <div class="posts">
+        {% for post in post_list %}
+        <div class="post-item"></div>
+        <a href="{% url 'post_detail' post.slug  %}">
+
+            <div class="card">
+                <div class="image">
+                    <img src={% if post.thumbnail_image %} {{ post.thumbnail_image.url }} {% else %} {{ default_thumbnail }} {% endif %} alt="Post Thumbnail">
+                </div>
+                <div class="description">
+                    <div class="card-title">
+                        <span>{{ post.title }}</span>
+                    </div>
+                </div>
+            </div>
+
+        </a>
+    </div>
+    {% endfor %}
+    </div>
+    <style>
+        .posts {
+            margin: auto;
+            width: 700px;
+        }
+        
+        .post-item {
+            padding: 20px;
+        }
+        
+        img {
+            width: 650px;
+        }
+        
+        .card-title {
+            font-size: 3rem;
+            text-align: center;
+        }
+        
+        a {
+            text-decoration: none;
+        }
+    </style>
+</body>
+
+</html>

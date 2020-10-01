@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>The VEX Sat_project - Leaflet</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--<link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+</head>
+
+<body>
+    <div id="mapid" style="width: device-width; height: 900px;"></div>
+    <script>
+        const gsIcon = L.icon({
+            iconUrl: 'https://1.bp.blogspot.com/-WA2JovoX6Ms/X3RX7z_VwZI/AAAAAAAABSA/vNgLp4RJgZ4BgOvAieRS6gapwpislhAKwCLcBGAsYHQ/s512/telescope.png',
+            iconSize: [50, 32],
+            iconAnchor: [25, 16]
+        });
+        var mymap = L.map('mapid').setView([41.112469, -101.865234], 5);
+        //const marker=L.marker([0,0]).addTo(mymap)
+        L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYW5pczQ1MCIsImEiOiJja2ZvMmx1c28xcTZ2MnVxaHo1aXZnNGd2In0.qpEyf46VM34-VVo9UrBpjw', {
+            maxZoom: 18,
+            attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+                '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+                'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+            id: 'mapbox/streets-v11',
+            tileSize: 512,
+            zoomOffset: -1,
+        }).addTo(mymap);
+        const json_url = 'https://raw.githubusercontent.com/Dimanjan/csv/master/groundStations.json'
+        async function getlonlat() {
+            const response = await fetch(json_url);
+            const data = await response.json();
+            const latitude = data.GroundStation[1]
+            console.log(latitude);
+            for (var x of latitude) {
+                const lat = x.Location.Latitude
+                const lon = x.Location.Longitude
+                console.log(lat)
+                L.marker([lat, lon], {
+                    icon: gsIcon
+                }).bindPopup("I am  " + x.Id + ' ' + x.Name).openPopup().addTo(mymap)
+            }
+        }
+        var popup = L.popup();
+
+        function onMapClick(e) {
+            popup
+                .setLatLng(e.latlng)
+                .setContent("You clicked the map at " + e.latlng.toString())
+                .openOn(mymap);
+        }
+        mymap.on('click', onMapClick);
+        getlonlat();
+    </script>
+</body>
+
+</html>
