@@ -21,9 +21,9 @@ TEMPLATES_DIRS = os.path.join(BASE_DIR,'templates')
 SECRET_KEY = 't3p*=&_sr)6rc)s8o(m7(_uth-&!8$aatgl)kd&#y#_7g-1(q^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ["localhost","trekk2phy.pythonanywhere.com"]
+ALLOWED_HOSTS = ["localhost","teamvex.pythonanywhere.com"]
 
 
 # Application definition
