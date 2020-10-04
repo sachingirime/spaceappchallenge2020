@@ -5,53 +5,207 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Main</title>
+
+
+
 </head>
 
 <body>
-    <div class="posts">
-        {% for post in post_list %}
-        <div class="post-item"></div>
-        <a href="{% url 'post_detail' post.slug  %}">
 
-            <div class="card">
-                <div class="image">
-                    <img src={% if post.thumbnail_image %} {{ post.thumbnail_image.url }} {% else %} {{ default_thumbnail }} {% endif %} alt="Post Thumbnail">
-                </div>
-                <div class="description">
-                    <div class="card-title">
-                        <span>{{ post.title }}</span>
-                    </div>
-                </div>
-            </div>
-
+    <div class='logo' style="text-align: center;">
+        <a href='index.html'><img src='https://1.bp.blogspot.com/-itFCwk4kvmc/X3nZQoT3xTI/AAAAAAAABVU/KAf9rsoIgtQujFQXzA0lF_0SqUkp6IKiACLcBGAsYHQ/s16000/logo.png'>
         </a>
     </div>
-    {% endfor %}
+
+    <nav>
+        <ul>
+            <li font-family=Ubuntu><a href='#'>Home</a></li>
+            <li font-family=Ubuntu><a href='#footer'>About US</a></li>
+
+        </ul>
+    </nav>
+
+
+    <div id="particles-js">
+
+
+
+
+
+        {% for post in post_list %}
+
+        <div class="card" style="margin-top: 15px">
+            <p style="text-align: center;">
+                <a href="{% url 'post_detail' post.slug  %}">
+                    <img src={% if post.thumbnail_image %} {{ post.thumbnail_image.url }} {% else %} {{ default_thumbnail }} {% endif %} alt="Post Thumbnail">
+                </a>
+                <div class="container">
+                    <h4 style="text-align: center" ;><b> {{ post.title }}</b></h4>
+
+                </div>
+            </p>
+
+        </div>
+
+
+
+            {% endfor %}
+
+
+ <footer id="footer">
+            <div>
+                <h2>About Us</h2>
+
+                <p>Anis Shrestha</p>
+                <p>Laxmi Mahara</p>
+                <p>Sachin Giri</p>
+                <p>Sunil Shah</p>
+                <p>Suyogya Bhandari</p>
+
+            </div>
+        </footer>
+
+
+
+
     </div>
+
+    <script src="{% static 'js/particles.js' %}"></script>
+    <script src="{% static 'js/app.js' %}"></script>
+
     <style>
-        .posts {
-            margin: auto;
-            width: 700px;
+    footer {
+            position: absolute;
+            align-items: center;
+            color: #b19295;
+            left: 50%;
+            transform: translateX(-10%);
         }
-        
-        .post-item {
-            padding: 20px;
+
+        footer h2 {
+            color: blue;
         }
-        
-        img {
-            width: 650px;
+    img{
+        max-width:700px;
+    }
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-size: 16px;
+            background-image: url('https://1.bp.blogspot.com/-lehQnsYNDUk/X3nVhT-_vEI/AAAAAAAABU0/JatqlZAo-6kswAz_b4TR_z13WCExO_QnQCLcBGAsYHQ/s16000/image1.jpg');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            height: 100vh;
         }
-        
-        .card-title {
-            font-size: 3rem;
+
+        .btext {
+            color: #f9f3f4;
+            position: absolute;
+            text-align: center;
+            top: 40%;
+            width: 100%;
+            line-height: 0.4em;
+        }
+
+        h1 {
+            font-size: 50px;
+        }
+
+        p {
+            text-align: 'center';
+        }
+
+        .btn {
+            color: #fff;
+            text-decoration: none;
+            border: #ccc 1px solid;
+            padding: 10px 15px;
+            border-radius: 8px;
+            line-height: 4em;
+        }
+
+        .btn:hover {
+            color: #b19295;
+            border: #fff 1px solid;
+        }
+
+        nav {
+            width: 100% justify-content: space-between;
+            align-items: center;
+            opacity: 1;
+            overflow: auto;
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        ul {
+            padding: 0;
+            margin-left: 15px;
+            list-style: none;
+        }
+
+        li {
+            float: left;
+        }
+
+        .logo img {
+            position: absolute;
+            padding: 0;
+            -webkit-filter: invert(1);
+            filter: invert(1);
+            transform: translateY(-20%);
+        }
+
+        nav a {
+            width: 100%;
+            display: block;
+            padding: 1rem;
+            text-decoration: none;
+            font-size: 30px;
+            color: #f2f2f2;
             text-align: center;
         }
-        
-        a {
-            text-decoration: none;
+
+        nav a:hover {
+            background: purple;
+            opacity: 0.5;
+            transition: 0.5;
+        }
+
+        nav a:active {
+            background: purple;
+            opacity: 1;
+        }
+
+        #particles-js {}
+
+        .card {
+            /* Add shadows to create the "card" effect */
+            transition: 0.3s;
+            padding-left: 50px;
+        }
+
+        .card img {
+            padding-left: '50px';
+            align-content: center;
+        }
+        /* On mouse-over, add a deeper shadow */
+
+        .card:hover {
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+        }
+        /* Add some padding inside the card container */
+
+        .container {
+            padding: 2px 16px;
         }
     </style>
 </body>
 
 </html>
+
+
+
+
+
